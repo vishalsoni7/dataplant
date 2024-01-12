@@ -66,6 +66,7 @@ scheduleRouter.get("/:id", async (req, res) => {
   }
 });
 
+// Search By Title
 scheduleRouter.patch("/:id", async (req, res) => {
   const { title, description, subject, frequency, repeat, time } = req.body;
   console.log(title, description, subject, frequency, repeat, time);
