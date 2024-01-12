@@ -43,8 +43,10 @@ scheduleRouter.post("/", async (req, res) => {
 scheduleRouter.get("/search", async (req, res) => {
   const { title } = req.query;
 
+  const searchInput = title.toLowerCase();
+
   try {
-    const schedules = await Schedule.findOne({ title });
+    const schedules = await Schedule.findOne({ title: searchInput });
     res.json(schedules);
   } catch (error) {
     console.error("Error finding schedules by title:", error);
