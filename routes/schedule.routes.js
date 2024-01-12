@@ -45,12 +45,6 @@ scheduleRouter.get("/search", async (req, res) => {
 
   try {
     const schedules = await Schedule.findOne({ title });
-    if (!schedules || schedules.length === 0) {
-      return res
-        .status(404)
-        .json({ error: "No schedules found with the given title" });
-    }
-
     res.json(schedules);
   } catch (error) {
     console.error("Error finding schedules by title:", error);
@@ -71,32 +65,6 @@ scheduleRouter.get("/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
-// Update By Id
-// scheduleRouter.patch("/:id", async (req, res) => {
-//   const { title, description, subject, frequency, repeat, time } = req.body;
-//   try {
-//     const updatedSchedule = await Schedule.findByIdAndUpdate(
-//       req.params.id,
-//       {
-//         title,
-//         description,
-//         subject,
-//         frequency,
-//         repeat,
-//         time,
-//       },
-//       { new: true },
-//     );
-//     if (!updatedSchedule) {
-//       return res.status(404).json({ error: "Schedule not found" });
-//     }
-//     res.status(200).json(updatedSchedule);
-//   } catch (error) {
-//     console.error("Error updating schedule:", error);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
 
 scheduleRouter.patch("/:id", async (req, res) => {
   const { title, description, subject, frequency, repeat, time } = req.body;
