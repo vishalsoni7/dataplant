@@ -20,9 +20,6 @@ scheduleRouter.get("/", async (req, res) => {
 scheduleRouter.post("/", async (req, res) => {
   try {
     const { title, description, subject, frequency, repeat, time } = req.body;
-    // if (!title || !description || !subject || !frequency || !repeat || !time) {
-    //   return res.status(400).json({ error: "All fields are required" });
-    // }
     const schedule = new Schedule({
       title,
       description,
@@ -43,7 +40,7 @@ scheduleRouter.post("/", async (req, res) => {
 scheduleRouter.get("/search", async (req, res) => {
   const { title } = req.query;
 
-  const searchInput = title.toLowerCase();
+  const searchInput = title.trim().toLowerCase();
 
   try {
     const schedules = await Schedule.findOne({ title: searchInput });
